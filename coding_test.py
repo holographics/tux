@@ -26,7 +26,7 @@ class Inventory(object):
     def place_order(self, small, medium, large, day):
         for style in STYLES:
             stock = dict()
-            for size in stock:
+            for size in SIZES:
                 stock[size] = self.get_tuxs(style, size, day)
 
             if len(stock['small']) >= small and len(stock['medium']) >= medium and len(stock['large']) >= large:
