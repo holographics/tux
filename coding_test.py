@@ -25,15 +25,16 @@ class Inventory(object):
                                                     tux.size == size, 
                                                     tux.is_available(day)])]
 
-    def place_order(self, small, medium, large, day):
+    def get_stock(self, day):
         for style in STYLES:
-            stock = {size:self.get_tuxs(style, size, day) for size in SIZES}
-            
-            if all([len(stock['small']) >= small, 
-                    len(stock['medium']) >= medium, 
-                    len(stock['large']) >= large]):
+            yield style, {size:self.get_tuxs(style, size, day) for size in SIZES}
 
-                [tux.set_day(day) for size, tuxs in stock.items() for tux in tuxs]
+    def place_order(self, small, medium, large, day):
+        for style, stock in self.get_stock(day):
+            if all([a>=b for a,b in zip([len(stock[size]) for size in SIZES], 
+                                        [small, medium, large])]):
+
+                [tux.set_day(day) for tuxs in stock.values() for tux in tuxs]
                 print 'Tuxedos style %s are available for day %s' % (style, day)
                 break
         else:
