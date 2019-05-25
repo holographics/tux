@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from collections import defaultdict
 orders = dict(A=defaultdict(list), 
             B=defaultdict(list))
