@@ -27,8 +27,7 @@ def place_order(small, medium, large, day):
 
 if __name__ == '__main__': 
     for day in range(1, 5):
-        res = place_order(small = 3, medium = 3, large = 3, day = 2)
-        if res:
-            print ('Sufficient number of tuxedos is available on day %s' % day)
+        if place_order(small = 3, medium = 3, large = 3, day = 2):
+            print ('Sufficient number is available on a day %s.' % day)
         else:
-            print ('More tuxedos are needed for day %s!' % day)
+            print ('More are needed on a day %s.' % day)
